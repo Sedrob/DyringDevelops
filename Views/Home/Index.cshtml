@@ -1,0 +1,122 @@
+﻿@model Test.Models.DataBaseViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div>
+    <hr />
+    <section class="container">
+        <div class="row">
+            <form method="post">
+                <div class="col-12 text-center">
+                    <table style="width:1200px; margin: auto">
+                        <tr>
+                            <td><p> Начальная <input asp-for="StartDamp" type="number" size="2" name="start" min="25" max="120" value="60"></p></td>
+                            <td><p> Конечная <input asp-for="EndDamp" type="number" size="2" name="end" min="6" max="22" value="16"></p></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select asp-for="S1" name="S1">
+                                    <option>22</option>
+                                    <option>25</option>
+                                    <option>32</option>
+                                    <option>40</option>
+                                    <option>50</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select asp-for="S2" name="S2">
+                                    <option>75</option>
+                                    <option>100</option>
+                                    <option>125</option>
+                                    <option>150</option>
+                                    <option>175</option>
+                                    <option>200</option>
+                                    <option>250</option>
+                                    <option>300</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><p> Скорость воздуха <input asp-for="MoveAir" type="number" size="2" name="mc" min="1.5" max="3" value="1.5" step="0.5"></p></td>
+                            <td>
+                                <select asp-for="EndDamp" type="text" name="domainCirculation">
+                                    <option>Реверсивная</option>
+                                    <option>Нереверсивная</option>
+                                </select>
+                            </td>
+                            <td><p> Ширина штабеля <input asp-for="numericStacks" type="number" size="2" name="sht" min="0.5" max="3" value="3" step="0.5"></p></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+
+                <div class="py-4 col-12 text-center">
+                    <table style="width:800px; margin: auto">
+                        <tr>
+                            <td>Ступень 1</td>
+                            <td>
+                                <p>
+                                    tc, C
+                                    <select asp-for="Tc1" name="S2">
+                                        <option>60</option>
+                                        <option>65</option>
+                                        <option>75</option>
+                                    </select>
+                                </p>
+                            </td>
+                            <td>
+                                <p>dt,C <input asp-for="DtC1" type="number" size="2" name="mc" min="3" max="9" value="8"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ступень 2</td>
+                            <td>
+                                <p>
+                                    tc, C
+                                    <select asp-for="Tc2" name="S2">
+                                        <option>60</option>
+                                        <option>65</option>
+                                        <option>75</option>
+                                    </select>
+                                </p>
+
+                            </td>
+                            <td>
+                                <p>dt,C <input asp-for="DtC2" type="number" size="2" name="mc" min="7" max="15" value="15" /></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ступень 3</td>
+                            <td>
+                                <p>
+                                    tc, C
+                                    <select asp-for="Tc3" name="S2">
+                                        <option>70</option>
+                                        <option>75</option>
+                                    </select>
+                                </p>
+                            </td>
+                            <td>
+                                <p>dt,C   <input asp-for="DtC3" type="number" size="2" name="mc" min="19" max="26" value="25" /></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="form-group text-center">
+                        <input type="submit" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+    </section>
+    <nav class="nav nav-pills flex-column flex-sm-row">
+        <a asp-controller="Home" asp-action="PrintValue"> Test </a>
+        <a asp-controller="Home" asp-action="PrintValuesCollection"> Test 2 </a>
+    </nav>
+</div>
