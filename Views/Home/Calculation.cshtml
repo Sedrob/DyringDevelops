@@ -1,0 +1,60 @@
+﻿@model Test.Formulas.ValuesCalculation
+@{
+    ViewData["Title"] = "Calculation";
+}
+
+<h1>Calculation</h1>
+<div>
+    <form method="get" asp-action="Index">
+        <div class="col-12 text-center">
+            <table style="width:1200px; margin: auto" border="1">
+                <caption>Таблица значений</caption>
+                <thead>
+                    <tr>
+                        <th>Ступень режима</th>
+                        <th>Влажность древесины Whi</th>
+                        <th>Влажность древесины Wki</th>
+                        <th>tc, C</th>
+                        <th>tm, C</th>
+                        <th>ф</th>
+                        <th>Wp, %</th>
+                        <th>Ei</th>
+                        <th>Aci * 10^6</th>
+                        <th>Ац</th>
+                        <th>S1/S2</th>
+                        <th>Ct</th>
+                        <th>CtB</th>
+                        <th>C</th>
+                        <th>T</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < 3; i++)
+                     {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@Model.wHi[i]</td>
+                            <td>@Model.wKi[i]</td>
+                            <td>@Model.tC[i]</td>
+                            <td>@Model.tcM[i]</td>
+                            <td>@Model.f[i]</td>
+                            <td>@Model.wp[i]</td>
+                            <td>@Model.eI[i]</td>
+                            <td>@Model.aCi[i]</td>
+                            <td>@Model.domainCirculation</td>
+                            <td>@Model.s1s2</td>
+                            <td>@Model.cT[i]</td>
+                            <td>@Model.cTB[i]</td>
+                            <td>@Model.cC[i]</td>
+                            <td>@Model.cTime[i]</td>
+                        </tr> 
+                     }
+                </tbody>
+            </table> 
+        </div>
+        <div class="col-12 text-right">
+            <h4>Продолжительность сушки @Model.time часов</h4>
+        </div>
+    </form>
+</div>
+

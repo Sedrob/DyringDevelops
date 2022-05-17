@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Test.Formulas;
 using Test.Models;
 
 namespace Test.Controllers
@@ -27,6 +28,18 @@ namespace Test.Controllers
         {
             return View();
         }
+        //public IActionResult Calculation()
+        //{
+
+        //    return View();
+        //}
+
+        public IActionResult Calculation(Calculation calc, DataBaseViewModel dataBase, ValuesCalculation values, ValuesTableCCalculation tableC)
+        {
+            values.Values(calc, dataBase, values, tableC);
+
+            return View(values);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -34,24 +47,34 @@ namespace Test.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+
+
+
+
+
+
+
+
+
+
         // Ввод значений
-        [HttpGet]
-        public IActionResult PrintValue()
-        {
-            int age = 16;
-            char name = 'g';
-            //var user = new User { Name = name, Age = age };
-            return  View(age);
-        }
+        //[HttpGet]
+        //public IActionResult PrintValue()
+        //{
+        //    int age = 16;
+        //    char name = 'g';
+        //    //var user = new User { Name = name, Age = age };
+        //    return  View(age);
+        //}
 
-        [HttpGet]
-        public IActionResult PrintValuesCollection()
-        {
-            var numberList = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            var numberArray = new string[] { "1", "2", "3" };
+        //[HttpGet]
+        //public IActionResult PrintValuesCollection()
+        //{
+        //    var numberList = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        //    var numberArray = new string[] { "1", "2", "3" };
 
-            return View(numberList);
-        }
+        //    return View(numberList);
+        //}
 
         //[HttpGet]
         //public IActionResult CreateUser() => View();
