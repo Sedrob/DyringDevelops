@@ -37,6 +37,8 @@ namespace Test.Formulas
         public List<double> cTime { get; set; }
 
         public double time { set; get; }
+        public int camerValue { get; set; }
+        public Decimal cameraTimeValue { get; set; }
         public void Values(Calculation calc, DataBaseViewModel dataBase, ValuesCalculation values, ValuesTableCCalculation tableC)
         {
             wHi = calc.WoodMoistureH(dataBase);
@@ -57,8 +59,14 @@ namespace Test.Formulas
             cC = calc.c3(dataBase, values, tableC);
 
             cTime = calc.dryngTime(dataBase, values);
+            
+            time = cTime.ToArray().Sum();
+            camerValue = dataBase.CamerValue;
 
-            values.time = values.cTime.ToArray().Sum();
+            cameraTimeValue = ((int)time + 8) / 24;
+            cameraTimeValue = Math.Ceiling(Convert.ToDecimal(cameraTimeValue));
+
+
         }
     }
 }

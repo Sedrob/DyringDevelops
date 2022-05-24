@@ -7,6 +7,7 @@
 <div>
     <form method="get" asp-action="Index">
         <div class="col-12 text-center">
+            
             <table style="width:1200px; margin: auto" border="1">
                 <caption>Таблица значений</caption>
                 <thead>
@@ -51,6 +52,27 @@
                      }
                 </tbody>
             </table> 
+            <table style="width:1200px; margin: auto" border="1">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        @for(int i = 1; i <= System.DateTime.DaysInMonth(DateTime.Now.Year,DateTime.Now.Month) ; i++)
+                         {
+                            <td>@i</td>
+                         }
+                    </tr>
+                    @for(int i = 1; i <= Model.camerValue; i++)
+                     {
+                        <tr>
+                            <td>Камера @i</td>
+                            @for (int j = 1; j <= System.DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); j++)
+                             {
+                                <td colspan="@Model.cameraTimeValue">1</td>
+                             }
+                        </tr>
+                     }
+                </thead>
+            </table>
         </div>
         <div class="col-12 text-right">
             <h4>Продолжительность сушки @Model.time часов</h4>

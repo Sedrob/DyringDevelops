@@ -26,5 +26,7 @@ namespace Test.Models
         public int DtC2 { get; set; }
         public int DtC3 { get; set; }
 
+        public int CamerValue { get; set; }
+
     }
 }
