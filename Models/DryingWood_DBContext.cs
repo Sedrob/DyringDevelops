@@ -50,7 +50,8 @@ namespace Test
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-I6LAO3J\\SQLEXPRESS;Database=DryingWood_BD;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-I6LAO3J\\SQLEXPRESS;Database=DryingWood_DB;Trusted_Connection=True;");
+                //optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=DryingWood_DB;User Id=admin;password=admin;Trusted_Connection=True;");
             }
         }
 

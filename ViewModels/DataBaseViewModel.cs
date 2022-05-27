@@ -28,5 +28,6 @@ namespace Test.Models
 
         public int CamerValue { get; set; }
 
+        public string TreeSpecies { get; set; }
     }
 }
