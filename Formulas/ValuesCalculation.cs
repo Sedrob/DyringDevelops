@@ -64,7 +64,7 @@ namespace Test.Formulas
             camerValue = dataBase.CamerValue;
 
             cameraTimeValue = ((int)time + 8) / 24;
-            cameraTimeValue = Math.Ceiling(Convert.ToDecimal(cameraTimeValue));
+            cameraTimeValue = Math.Ceiling(Convert.ToDecimal((int)time + 8)) / 24;
 
 
         }

@@ -65,6 +65,8 @@ namespace Test
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.ChamberNumber).HasColumnName("chamberNumber");
+
                 entity.Property(e => e.ChamberHoursLeft).HasColumnName("chamberHoursLeft");
 
                 entity.Property(e => e.ChamberHoursSpend).HasColumnName("chamberHoursSpend");

@@ -29,5 +29,10 @@ namespace Test.Models
         public int CamerValue { get; set; }
 
         public string TreeSpecies { get; set; }
+        public int CameraId { get; set; }
+
+        //Данные для получения число камер редактирования
+        public int CameraValueId { get; set; }
+
     }
 }
