@@ -8,6 +8,7 @@ namespace Test
     public partial class Chamber
     {
         public int Id { get; set; }
+        public int ChamberNumber { get; set; }
         public int ChamberWoodId { get; set; }
         public int ChamberHoursLeft { get; set; }
         public int ChamberHoursSpend { get; set; }

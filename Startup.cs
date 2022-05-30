@@ -27,6 +27,8 @@ namespace Test
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DryingWood_DBContext>(options => options.UseSqlServer(connection));
+            //services.AddDbContext<DryingWood_DBContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews();
             services.AddMvc();

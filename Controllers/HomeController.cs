@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -13,32 +14,35 @@ namespace Test.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private DryingWood_DBContext dBContext;
+        public HomeController(ILogger<HomeController> logger, DryingWood_DBContext context)
         {
             _logger = logger;
+            dBContext = context;
         }
 
         public IActionResult Index()
         {
             return View();
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> Index(PlanDrying planDrying, DataBaseViewModel dataBase)
+        {
+            int timeNow = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) * dataBase.CamerValue;
+            planDrying.ValueChamber = dataBase.CamerValue;
+            planDrying.MonthDrying = DateTime.Now.ToString("MMMM");
+            planDrying.Utility = 0;
+            planDrying.HoursLeftDrying = timeNow * 24;
+            planDrying.HoursSpendDrying = planDrying.HoursLeftDrying - timeNow * 24;
+            dBContext.PlanDryings.Add(planDrying);
+            await dBContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
         public IActionResult Privacy()
         {
             return View();
-        }
-        //public IActionResult Calculation()
-        //{
-
-        //    return View();
-        //}
-
-        public IActionResult Calculation(Calculation calc, DataBaseViewModel dataBase, ValuesCalculation values, ValuesTableCCalculation tableC)
-        {
-            values.Values(calc, dataBase, values, tableC);
-
-            return View(values);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -46,46 +50,5 @@ namespace Test.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-
-
-
-
-
-
-
-
-
-
-        // Ввод значений
-        //[HttpGet]
-        //public IActionResult PrintValue()
-        //{
-        //    int age = 16;
-        //    char name = 'g';
-        //    //var user = new User { Name = name, Age = age };
-        //    return  View(age);
-        //}
-
-        //[HttpGet]
-        //public IActionResult PrintValuesCollection()
-        //{
-        //    var numberList = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        //    var numberArray = new string[] { "1", "2", "3" };
-
-        //    return View(numberList);
-        //}
-
-        //[HttpGet]
-        //public IActionResult CreateUser() => View();
-
-        //[HttpPost]
-        //public async Task<IActionResult> CreateUser(CreateUserViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await _userSevice.AddUser
-        //    }
-        //}
     }
 }

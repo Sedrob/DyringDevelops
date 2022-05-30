@@ -1,0 +1,32 @@
+﻿@model Test.ViewModels.DetailsPlanViewModel
+@{
+	ViewData["Title"] = "Details";
+}
+
+<div class="card col-md-12">
+	<table style="width:1200px; margin: auto" border="1">
+		<thead>
+			<tr>
+				<td> </td>
+				@for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
+				 {
+					<td>@i</td>
+				 }
+			</tr>
+			@for (int i = 1; i <= Model.plan; i++)
+			 {
+				<tr>
+					<td>Камера @i</td>
+					@foreach (Chamber prop in Model.chambers) 
+						{
+						@if (prop.ChamberNumber == i) 
+						{
+						<td colspan="@(Math.Ceiling(prop.ChamberHoursSpend / Convert.ToDecimal(24)))">1</td>	
+						}
+						
+					 }
+				</tr>
+			 }
+		</thead>
+	</table>
+</div>
