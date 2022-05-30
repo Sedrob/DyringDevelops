@@ -33,6 +33,8 @@ namespace Test.Models
 
         //Данные для получения число камер редактирования
         public int CameraValueId { get; set; }
+        //Данные о плане 
+        public int? PlanID { get; set; }
 
     }
 }

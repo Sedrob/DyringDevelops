@@ -5,6 +5,7 @@
 <div>
 	<form method="post" asp-action="Calculation">
 		<div class="col-12 text-center">
+			<p>План № <input asp-for="PlanID" type="number" size="2" name="planID" min="@Model.PlanID" max="@Model.PlanID" value="@Model.PlanID"></p>
 			<p>
 				Порода =
 				<select asp-for="TreeSpecies" name="treeSpecies">

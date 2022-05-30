@@ -55,13 +55,13 @@ namespace Test.Controllers
             PlanDrying plan = await dBContext.PlanDryings.FirstOrDefaultAsync(p => p.Id == id);
             DataBaseViewModel dataBase = new DataBaseViewModel();
             dataBase.CameraValueId = plan.ValueChamber;
+            dataBase.PlanID = id;
             return View(dataBase);
         }
         // GET: CalibrateValueController/Create
         public async Task<IActionResult> Calculation(Calculation calc, DataBaseViewModel dataBase, ValuesCalculation values, ValuesTableCCalculation tableC, ValueWood valueWood, ChamberWood chamberWood, Chamber chamber)
         {
             int timeNow = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
-
             values.Values(calc, dataBase, values, tableC);
 
             valueWood.StartWetness = dataBase.StartDamp;
@@ -82,7 +82,7 @@ namespace Test.Controllers
             chamber.ChamberWoodId = chamberWood.Id;
             chamber.ChamberHoursLeft = timeNow * 24;
             chamber.ChamberHoursSpend += (int)values.time;
-            PlanDrying plan = await dBContext.PlanDryings.FirstOrDefaultAsync(p => p.Id == 9);
+            PlanDrying plan = await dBContext.PlanDryings.FirstOrDefaultAsync(p => p.Id == dataBase.PlanID);
             chamber.PlanDryingId = plan.Id;
             dBContext.Chambers.Add(chamber);
             await dBContext.SaveChangesAsync();
