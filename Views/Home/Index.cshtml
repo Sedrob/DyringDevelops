@@ -5,26 +5,31 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+	<h3>Учет и планирование сушильного цеха</h3>	
 </div>
 <div>
     <hr />
     <section class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h2>Расчет сушки древесины</h2>
+				<div class="img-chamber text-center">
+					<img src="~/images/Chamber.png" alt="chamber" style="width:100%;">
+					<p class="span-text-img">
+						Сборно-металлические алюминиевые камеры
+					</p>
+				</div>
             </div>
-			<form method="post" asp-action="Index">
+			<div class="col-12">
 				<div class="col-12">
-					<p> Кол-во камер <input asp-for="CamerValue" type="number" size="2" name="camerValue" min="2" max="20" value="5"> </p>
+					<h3>Создать план на @DateTime.Now.AddMonths(1).ToString("MMMM")</h3>
 				</div>
-				
-				<div class="form-group text-center">
-					<input type="submit" asp-action="Index" class="btn btn-primary" />
-				</div>
-			</form>
-			
+				<form method="post" asp-action="Index">
+					<p>
+						Количество камер <input asp-for="CamerValue" type="number" size="2" name="camerValue" min="2" max="20" value="5">
+							<input type="submit" value="Создать" class="c-button-index" />
+					</p>
+				</form>
+			</div>
         </div>
 
     </section>

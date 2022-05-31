@@ -35,7 +35,44 @@ html {
     font-size: 16px;
   }
 }
+/*Personal settings css*/
+.img-chamber {
+    position:relative;
+}
+.span-text-img {
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    font-size: 45px;
+    top: 50%;
+    left: 50%;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: -50%;
+    transform: translate(-50%,-50%);
+    background: rgb(92,74,74, 0.6);
+    text-shadow: 2px 2px 4px black;
+}
+.c-button-index {
+    min-width: 100px;
+    border: 0;
+    border-radius: 20px;
+    background: rgb(241 146 31);
+    color: #fff;
+    padding: 6px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.c-button-index:hover {
+    background: rgb(178 115 0);
+}
 
+.c-button-index:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px #cbd6ee;
+}
+
+/*Personal settings css*/
 .border-top {
   border-top: 1px solid #e5e5e5;
 }

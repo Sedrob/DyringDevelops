@@ -43,7 +43,6 @@ namespace Test.Controllers
                 {
                     details.chambers = dBContext.Chambers.Where(p => p.PlanDryingId == id);
                     details.plan = plan.ValueChamber;
-                    //var chamber = chamberListWood(id);
 
                     return View(details);
                 }
@@ -89,6 +88,11 @@ namespace Test.Controllers
 
             return View(values);
         }
+
+        //public async Task<IActionResult> DetailsChambers(int? id, DetailsPlanViewModel details)
+        //{
+            
+        //}
         // POST: CalibrateValueController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -10,5 +10,6 @@ namespace Test.ViewModels
         public IEnumerable<Chamber> chambers { get; set; }
         public int plan { get; set; }
 
-    }
+
+}
 }

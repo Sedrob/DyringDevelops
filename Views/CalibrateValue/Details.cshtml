@@ -18,11 +18,11 @@
 				<tr>
 					<td>Камера @i</td>
 					@foreach (Chamber prop in Model.chambers) 
-						{
+					 {
 						@if (prop.ChamberNumber == i) 
-						{
-						<td colspan="@(Math.Ceiling(prop.ChamberHoursSpend / Convert.ToDecimal(24)))">1</td>	
-						}
+						 {
+							<td colspan="@(Math.Ceiling(prop.ChamberHoursSpend / Convert.ToDecimal(24)))">1</td>	
+						 }
 						
 					 }
 				</tr>

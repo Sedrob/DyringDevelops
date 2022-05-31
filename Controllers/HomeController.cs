@@ -31,7 +31,7 @@ namespace Test.Controllers
         {
             int timeNow = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) * dataBase.CamerValue;
             planDrying.ValueChamber = dataBase.CamerValue;
-            planDrying.MonthDrying = DateTime.Now.ToString("MMMM");
+            planDrying.MonthDrying = DateTime.Now.AddMonths(1).ToString("MMMM");
             planDrying.Utility = 0;
             planDrying.HoursLeftDrying = timeNow * 24;
             planDrying.HoursSpendDrying = planDrying.HoursLeftDrying - timeNow * 24;
