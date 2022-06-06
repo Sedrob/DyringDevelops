@@ -35,14 +35,14 @@ namespace Test.Controllers
             planDrying.Utility = 0;
             planDrying.HoursLeftDrying = timeNow * 24;
             planDrying.HoursSpendDrying = planDrying.HoursLeftDrying - timeNow * 24;
+            planDrying.LengValue = dataBase.LengValue;
+            planDrying.WidthValue = dataBase.WidthValue;
+            planDrying.HeightValue = dataBase.HeightValue;
+            planDrying.HeatCarrier = dataBase.HeatCarrier;
+            planDrying.TemperatureCarrier = dataBase.TemperatureCarrier;
             dBContext.PlanDryings.Add(planDrying);
             await dBContext.SaveChangesAsync();
             return RedirectToAction("Index");
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

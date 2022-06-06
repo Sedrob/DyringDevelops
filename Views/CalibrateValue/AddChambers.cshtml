@@ -15,54 +15,64 @@
 					<option>Лиственница</option>
 				</select>
 			</p>
-			<p> Загрузить в камеру <input asp-for="CameraId" type="number" size="2" name="cameraId" min="1" max="@Model.CameraValueId" value="1"></p>
+			<label> Загрузить в камеру <input asp-for="CameraId" type="number" size="2" name="cameraId" min="1" max="@Model.CameraValueId" value="1"></label>
 
-			<table style="width:1200px; margin: auto">
-				<tr>
-					<td><p> Начальная <input asp-for="StartDamp" type="number" size="2" name="startDamp" min="25" max="120" value="60"></p></td>
-					<td>
-						<p>
-							S1 =
-							<select asp-for="S1" name="s1">
-								<option>22</option>
-								<option>25</option>
-								<option>32</option>
-								<option>40</option>
-								<option>50</option>
+			<table style="width:960px; margin: auto">
+				<thead>
+					<tr>
+						<td><b>Влажность %</b></td>
+						<td><b>Сечение, мм</b></td>
+						<td><b>Характеристики камеры</b></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><label> Начальная <input asp-for="StartDamp" type="number" size="2" name="startDamp" min="25" max="120" value="60"></label></td>
+						<td>
+							<p>
+								S1 =
+								<select asp-for="S1" name="s1">
+									<option>22</option>
+									<option>25</option>
+									<option>32</option>
+									<option>40</option>
+									<option>50</option>
+								</select>
+							</p>
+						</td>
+						<td><label> Скорость воздуха <input asp-for="MoveAir" type="number" size="2" name="moveAir" min="1.5" max="3" value="1.5" step="0.5"></label></td>
+					</tr>
+					<tr>
+						<td><label> Конечная <input asp-for="EndDamp" type="number" size="2" name="endDamp" min="6" max="22" value="16"></label></td>
+						<td>
+							<p>
+								S2 =
+								<select asp-for="S2" name="s2">
+									<option>75</option>
+									<option>100</option>
+									<option>125</option>
+									<option>150</option>
+									<option>175</option>
+									<option>200</option>
+									<option>250</option>
+									<option>300</option>
+								</select>
+							</p>
+						</td>
+						<td>
+							<select asp-for="domainCirculation" type="text" name="domainCirculation">
+								<option>Реверсивная</option>
+								<option>Нереверсивная</option>
 							</select>
-						</p>
-					</td>
-					<td><p> Скорость воздуха <input asp-for="MoveAir" type="number" size="2" name="moveAir" min="1.5" max="3" value="1.5" step="0.5"></p></td>
-				</tr>
-				<tr>
-					<td><p> Конечная <input asp-for="EndDamp" type="number" size="2" name="endDamp" min="6" max="22" value="16"></p></td>
-					<td>
-						<p>
-							S2 =
-							<select asp-for="S2" name="s2">
-								<option>75</option>
-								<option>100</option>
-								<option>125</option>
-								<option>150</option>
-								<option>175</option>
-								<option>200</option>
-								<option>250</option>
-								<option>300</option>
-							</select>
-						</p>
-					</td>
-					<td>
-						<select asp-for="domainCirculation" type="text" name="domainCirculation">
-							<option>Реверсивная</option>
-							<option>Нереверсивная</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td />
-					<td />
-					<td><p> Ширина штабеля <input asp-for="numericStacks" type="number" size="2" name="numericStacks" min="0.5" max="3" value="3" step="0.5"></p></td>
-				</tr>
+						</td>
+					</tr>
+					<tr>
+						<td />
+						<td />
+						<td><p> Ширина штабеля <input asp-for="numericStacks" type="number" size="2" name="numericStacks" min="0.5" max="3" value="3" step="0.5"></p></td>
+					</tr>
+				</tbody>
+
 			</table>
 
 		</div>
@@ -70,6 +80,7 @@
 
 		<div class="py-4 col-12 text-center">
 			<table style="width:800px; margin: auto">
+				<tr><td colspan="3"><b>Параметры режима сушки</b><td></tr>
 				<tr>
 					<td>Ступень 1</td>
 					<td>
@@ -120,7 +131,7 @@
 				</tr>
 			</table>
 			<div class="form-group text-center">
-				<input type="submit" asp-action="Calculation" class="btn btn-primary" />
+				<input type="submit" value="Создать" class="btn btn-primary" />
 			</div>
 		</div>
 	</form>

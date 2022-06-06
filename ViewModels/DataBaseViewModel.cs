@@ -26,8 +26,14 @@ namespace Test.Models
         public int DtC2 { get; set; }
         public int DtC3 { get; set; }
 
+        //index
         public int CamerValue { get; set; }
-
+        public int LengValue { get; set; }
+        public string WidthValue { get; set; }
+        public string HeightValue { get; set; }
+        public string HeatCarrier { get; set; }
+        public int TemperatureCarrier { get; set; }
+        //
         public string TreeSpecies { get; set; }
         public int CameraId { get; set; }
 

@@ -18,6 +18,11 @@ namespace Test
         public int Utility { get; set; }
         public int HoursLeftDrying { get; set; }
         public int HoursSpendDrying { get; set; }
+        public int LengValue { get; set; }
+        public string WidthValue { get; set; }
+        public string HeightValue { get; set; }
+        public string HeatCarrier { get; set; }
+        public int TemperatureCarrier { get; set; }
 
         public virtual ICollection<Chamber> Chambers { get; set; }
     }

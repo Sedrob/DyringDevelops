@@ -3,30 +3,39 @@
 	ViewData["Title"] = "Details";
 }
 
-<div class="card col-md-12">
-	<table style="width:1200px; margin: auto" border="1">
-		<thead>
-			<tr>
-				<td> </td>
-				@for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
-				 {
-					<td>@i</td>
-				 }
-			</tr>
-			@for (int i = 1; i <= Model.plan; i++)
-			 {
+<div class="row">
+	<div class="col-12 text-center">
+		<h4>Календарный план на @DateTime.Now.AddMonths(1).ToString("MMMM.yyy")</h4>
+	</div>
+	<div class="col-12 container-table">
+		<table class="plan-table">
+			<thead>
 				<tr>
-					<td>Камера @i</td>
-					@foreach (Chamber prop in Model.chambers) 
-					 {
-						@if (prop.ChamberNumber == i) 
-						 {
-							<td colspan="@(Math.Ceiling(prop.ChamberHoursSpend / Convert.ToDecimal(24)))">1</td>	
-						 }
-						
-					 }
+					<td> </td>
+					@for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
+					{
+						<td><h5><b>@i</b></h5></td>
+					}
 				</tr>
-			 }
-		</thead>
-	</table>
+			</thead>
+			<tbody>
+				@for (int i = 1; i <= Model.plan; i++)
+				{
+					<tr>
+						<td><b>Камера @i</b></td>
+						@foreach (Chamber prop in Model.chambers)
+						{
+							@if (prop.ChamberNumber == i)
+							{
+								<td colspan="@(Math.Ceiling(prop.ChamberHoursSpend / Convert.ToDecimal(24)))">1</td>
+
+							}
+
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
 </div>
+

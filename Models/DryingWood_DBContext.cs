@@ -127,6 +127,16 @@ namespace Test
                 entity.Property(e => e.Utility).HasColumnName("utility");
 
                 entity.Property(e => e.ValueChamber).HasColumnName("valueChamber");
+
+                entity.Property(e => e.LengValue).HasColumnName("lengValue");
+                
+                entity.Property(e => e.WidthValue).HasColumnName("widthValue");
+                
+                entity.Property(e => e.HeightValue).HasColumnName("heightValue");
+                
+                entity.Property(e => e.HeatCarrier).HasColumnName("heatCarrier");
+                
+                entity.Property(e => e.TemperatureCarrier).HasColumnName("temperatureCarrier");
             });
 
             modelBuilder.Entity<SoftDl>(entity =>
