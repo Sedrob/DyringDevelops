@@ -13,21 +13,26 @@
 				<tr>
 					<td> </td>
 					@for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
-					{
+					 {
 						<td><h5><b>@i</b></h5></td>
-					}
+					 } 
 				</tr>
 			</thead>
 			<tbody>
 				@for (int i = 1; i <= Model.plan; i++)
 				{
 					<tr>
-						<td><b>Камера @i</b></td>
+						<td><b>Камера @i</b>
+							<a asp-action="DetailsChamber" asp-controller="CalibrateValue" asp-route-id="@i">Подробнее</a>
+						</td>
 						@foreach (Chamber prop in Model.chambers)
 						{
 							@if (prop.ChamberNumber == i)
 							{
-								<td colspan="@(Math.Ceiling(prop.ChamberHoursSpend / Convert.ToDecimal(24)))">1</td>
+								<td colspan="@(Math.Ceiling(prop.ChamberHoursSpend / Convert.ToDecimal(24)))">
+									<a asp-action="OneDetailsChamber" asp-controller="CalibrateValue" asp-route-id="@prop.Id">
+									@prop.ChamberWood.TypeWood -> @prop.ChamberWood.Value.StartWidth x @prop.ChamberWood.Value.EndWidth x @prop.PlanDrying.LengValue</a>
+						</td>
 
 							}
 

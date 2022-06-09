@@ -9,7 +9,8 @@ namespace Test.Formulas
 {
     public class ValuesCalculation
     {
-        
+        public IEnumerable<Chamber> chambers { get; set; }
+
         public List<int> wHi { get; set; }
 
         public List<int> wKi { get; set; }
@@ -39,6 +40,7 @@ namespace Test.Formulas
         public double time { set; get; }
         public int camerValue { get; set; }
         public Decimal cameraTimeValue { get; set; }
+        public int iteration { get; set; }
         public void Values(Calculation calc, DataBaseViewModel dataBase, ValuesCalculation values, ValuesTableCCalculation tableC)
         {
             wHi = calc.WoodMoistureH(dataBase);
@@ -67,6 +69,7 @@ namespace Test.Formulas
             cameraTimeValue = Math.Ceiling(Convert.ToDecimal((int)time + 8)) / 24;
 
 
+            iteration += 1;
         }
     }
 }

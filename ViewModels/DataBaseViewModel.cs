@@ -16,7 +16,6 @@ namespace Test.Models
         public double MoveAir { get; set; }
         public string domainCirculation { get; set; }
         public double numericStacks { get; set; }
-        public int numericStacksIndex { get; set; }
 
         public int Tc1 { get; set; }
         public int Tc2 { get; set; }
