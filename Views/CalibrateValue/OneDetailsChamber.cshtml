@@ -3,6 +3,10 @@
 	ViewData["Title"] = "OneDetailsChamber";
 }
 
+<h1 class="text-center">Расчет продолжительность сушки </h1>
+<h3 class="text-center">@Model.wood -> @Model.s1 x @Model.s2</h3>
+<hr />
+
 <div>
 	<form method="get" asp-action="Index">
 		@for (int j = 0; j < Model.iteration; j++)

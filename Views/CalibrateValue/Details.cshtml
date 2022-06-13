@@ -3,6 +3,9 @@
 	ViewData["Title"] = "Details";
 }
 
+<h1 class="text-center">Календарное планирование</h1>
+<hr />
+
 <div class="row">
 	<div class="col-12 text-center">
 		<h4>Календарный план на @DateTime.Now.AddMonths(1).ToString("MMMM.yyy")</h4>
@@ -31,7 +34,7 @@
 							{
 								<td colspan="@(Math.Ceiling(prop.ChamberHoursSpend / Convert.ToDecimal(24)))">
 									<a asp-action="OneDetailsChamber" asp-controller="CalibrateValue" asp-route-id="@prop.Id">
-									@prop.ChamberWood.TypeWood -> @prop.ChamberWood.Value.StartWidth x @prop.ChamberWood.Value.EndWidth x @prop.PlanDrying.LengValue</a>
+									@prop.ChamberWood.TypeWood <br/> @prop.ChamberWood.Value.StartWidth x @prop.ChamberWood.Value.EndWidth x @(prop.PlanDrying.LengValue * 1000) </a>
 						</td>
 
 							}

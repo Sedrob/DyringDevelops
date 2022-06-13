@@ -9,8 +9,6 @@ namespace Test.Formulas
 {
     public class ValuesCalculation
     {
-        public IEnumerable<Chamber> chambers { get; set; }
-
         public List<int> wHi { get; set; }
 
         public List<int> wKi { get; set; }
@@ -41,6 +39,9 @@ namespace Test.Formulas
         public int camerValue { get; set; }
         public Decimal cameraTimeValue { get; set; }
         public int iteration { get; set; }
+        public string wood { get; set; }
+        public double s1 { get; set; }
+        public double s2 { get; set; }
         public void Values(Calculation calc, DataBaseViewModel dataBase, ValuesCalculation values, ValuesTableCCalculation tableC)
         {
             wHi = calc.WoodMoistureH(dataBase);
@@ -61,13 +62,33 @@ namespace Test.Formulas
             cC = calc.c3(dataBase, values, tableC);
 
             cTime = calc.dryngTime(dataBase, values);
-            
-            time = cTime.ToArray().Sum();
-            camerValue = dataBase.CamerValue;
 
+            camerValue = dataBase.CamerValue;
+            wood = dataBase.TreeSpecies;
+            s1 = dataBase.S1;
+            s2 = dataBase.S2;
+            time = cTime.ToArray().Sum();
+
+            if (wood != "Лиственница")
+            {
+                if (s1 < 25) time += 8;
+                else if (s1 <= 32) time += 10;
+                else if (s1 <= 40) time += 12;
+                else if (s1 <= 50) time += 14;
+            }
+            else if(wood != null)
+            {
+                if (s1 <= 22) time += 8;
+                else if (s1 <= 32) time += 10;
+                else if (s1 <= 50) time += 12;
+            }
+            
+            
+            //
             cameraTimeValue = ((int)time + 8) / 24;
             cameraTimeValue = Math.Ceiling(Convert.ToDecimal((int)time + 8)) / 24;
-
+            //
+            
 
             iteration += 1;
         }

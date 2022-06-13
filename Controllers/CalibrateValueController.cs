@@ -158,6 +158,7 @@ namespace Test.Controllers
                     dataBase.EndDamp = chamb.ChamberWood.Value.EndWetness;
                     dataBase.S2 = chamb.ChamberWood.Value.EndWidth;
                     dataBase.S1 = chamb.ChamberWood.Value.StartWidth;
+                    dataBase.TreeSpecies = chamb.ChamberWood.TypeWood;
                     dataBase.MoveAir = 1.5;
                     dataBase.numericStacks = 3;
                     dataBase.domainCirculation = "Реверсивная";

@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<Test.PlanDrying>
 @{
-    ViewData["Title"] = "PrintValue";
+	ViewData["Title"] = "PrintValue";
 }
+
+<h1 class="text-center">План работы сушильного комплекса</h1>
+<hr />
 
 <div class="card col-md-12">
 	<table class="text-center">
@@ -9,19 +12,25 @@
 			<tr>
 				<th>Камер шт.</th>
 				<th>Месяц</th>
-				<th>Времени свободного</th>
-				<th>Затрачено</th>
+				<th>Потенциальная загруженность плана, ч</th>
+				<th>Загруженноть плана, ч</th>
 				<th>Полезность %</th>
 			</tr>
 		</thead>
 		@foreach (PlanDrying plan in Model)
 		{
-			<tr><td>@plan.ValueChamber</td><td>@plan.MonthDrying</td><td>@plan.HoursLeftDrying</td><td>@plan.HoursSpendDrying</td><td>@plan.Utility</td>
-																	<td>
-																	<a asp-action="Details" asp-controller="CalibrateValue" asp-route-id="@plan.Id">Подробнее</a> |
-																	<a asp-action="AddChambers" asp-controller="CalibrateValue" asp-route-id="@plan.Id">Добавить</a> |
-																	<a asp-action="Delete" asp-controller="CalibrateValue" asp-route-id="@plan.Id">Удалить</a>
-																	</td></tr>
+			<tr>
+				<td>@plan.ValueChamber</td>
+				<td>@plan.MonthDrying</td>
+				<td>@plan.HoursLeftDrying</td>
+				<td>@plan.HoursSpendDrying</td>
+				<td>@plan.Utility %</td>
+				<td>
+					<a asp-action="Details" asp-controller="CalibrateValue" asp-route-id="@plan.Id">Подробнее</a> |
+					<a asp-action="AddChambers" asp-controller="CalibrateValue" asp-route-id="@plan.Id">Добавить</a> |
+					<a asp-action="Delete" asp-controller="CalibrateValue" asp-route-id="@plan.Id">Удалить</a>
+				</td>
+			</tr>
 
 		}
 	</table>
