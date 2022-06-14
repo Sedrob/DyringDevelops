@@ -41,5 +41,8 @@ namespace Test.Models
         //Данные о плане 
         public int? PlanID { get; set; }
 
+        public int Packages { get; set; }
+
+
     }
 }

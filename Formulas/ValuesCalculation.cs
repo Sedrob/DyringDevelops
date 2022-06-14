@@ -42,6 +42,10 @@ namespace Test.Formulas
         public string wood { get; set; }
         public double s1 { get; set; }
         public double s2 { get; set; }
+
+        //Capacity
+        public double chCapacity { get; set; }
+
         public void Values(Calculation calc, DataBaseViewModel dataBase, ValuesCalculation values, ValuesTableCCalculation tableC)
         {
             wHi = calc.WoodMoistureH(dataBase);
@@ -82,13 +86,13 @@ namespace Test.Formulas
                 else if (s1 <= 32) time += 10;
                 else if (s1 <= 50) time += 12;
             }
-            
-            
+
             //
             cameraTimeValue = ((int)time + 8) / 24;
             cameraTimeValue = Math.Ceiling(Convert.ToDecimal((int)time + 8)) / 24;
             //
-            
+
+            calc.chamberCapacity(this, dataBase);
 
             iteration += 1;
         }

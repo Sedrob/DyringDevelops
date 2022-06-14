@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Test.Models;
 using Test.Formulas;
+using Microsoft.EntityFrameworkCore;
 
 namespace Test.Formulas
 {
@@ -279,7 +280,7 @@ namespace Test.Formulas
         {
             List<double> param = new List<double>();
 
-            double time, result = 0;
+            double time;
             for (int i = 0; i < 3; i++)
             {
                 if (1 / values.eI[i] < 1.4)
@@ -297,22 +298,37 @@ namespace Test.Formulas
                 param.Add(Math.Round(time));
             }
             return param;
-            //for (int j = 0; j < 3; j++)
-            //    result += Convert.ToDouble(dataComponent.Rows[j].Cells[14].Value);
+        }
+        //Capacity
+        public async void chamberCapacity(ValuesCalculation values, DataBaseViewModel dataBase)
+        {
+            DryingWood_DBContext dBContext = new DryingWood_DBContext();
+            PlanDrying plan = await dBContext.PlanDryings.FirstOrDefaultAsync(p => p.Id == dataBase.PlanID);
+            double l = plan.LengValue;
+            double b = Convert.ToDouble(plan.WidthValue);
+            double h = Convert.ToDouble(plan.HeightValue);
+            int m = dataBase.Packages;
+            double v = 1;
+            switch (dataBase.S1)
+            {
+                case 22:
+                    v = 0.333;
+                    break;
+                case 25:
+                    v = 0.356;
+                    break;
+                case 32:
+                    v = 0.399;
+                    break;
+                case 40:
+                    v = 0.438;
+                    break;
+                case 50:
+                    v = 0.474;
+                    break;
+            }
+            values.chCapacity =  Math.Round(l * b * h * m * v, 2);
         }
 
-        //public Calculation(DataBaseViewModel dataBase, ValuesCalculation values, ValuesTableCCalculation tableC)
-        //{
-        //WoodMoisture(dataBase, values);
-        //EnvironmentParameters(dataBase, values);
-        //PercentageHumidity(values);
-        //dryingEi(values);
-        //Reversibility(dataBase, values);
-        //SectionAci(values);
-        //ct(dataBase, values, tableC);
-        //ctB(dataBase, values);
-        //c3(dataBase, values, tableC);
-        //dryngTime(dataBase, values);
-        //}
     }
 }

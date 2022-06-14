@@ -13,6 +13,7 @@ namespace Test
         public int ChamberHoursLeft { get; set; }
         public int ChamberHoursSpend { get; set; }
         public int PlanDryingId { get; set; }
+        public decimal ChamberCapacity { get; set; }
 
         public virtual ChamberWood ChamberWood { get; set; }
         public virtual PlanDrying PlanDrying { get; set; }

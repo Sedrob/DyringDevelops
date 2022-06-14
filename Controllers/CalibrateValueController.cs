@@ -21,7 +21,6 @@ namespace Test.Controllers
             _logger = logger;
             dBContext = context;
         }
-        // GET: CalibrateValueController 
         //Получение всех планов
         public async Task<IActionResult> PrintValue()
         {
@@ -34,27 +33,25 @@ namespace Test.Controllers
                 }
                 i.HoursSpendDrying = chois;
                 i.Utility = Math.Round((decimal)i.HoursSpendDrying / (decimal)i.HoursLeftDrying * 100) ;
-                //if(chois != 0)
-                //{
-                //    i.Utility = i.HoursLeftDrying / i.HoursSpendDrying;
-                //}
-                i.HoursLeftDrying -= i.HoursSpendDrying;
                 
+                i.HoursLeftDrying -= i.HoursSpendDrying;
             }
             return View(await dBContext.PlanDryings.ToListAsync());
         }
 
-        private IQueryable chamberListWood(int? id)
-        {
-            var chamber = dBContext.Chambers.Where(p => p.PlanDryingId == id);
+        //private IQueryable chamberListWood(int? id)
+        //{
+        //    var chamber = dBContext.Chambers.Where(p => p.PlanDryingId == id);
 
-            return chamber;
-        }
-        // GET: CalibrateValueController/Details/5 План загруженности сушильных камер
+        //    return chamber;
+        //}
+        // GET: CalibrateValueController/Details/ План загруженности сушильных камер
         public async Task<IActionResult> Details(int? id, DetailsPlanViewModel details)
         {
             if(id != null)
             {
+                List<double> chamberCapacity = new List<double>();
+                List<double> chamberHoursSpend = new List<double>();
                 PlanDrying plan = await dBContext.PlanDryings.FirstOrDefaultAsync(p => p.Id == id);
                 if (plan != null)
                 {
@@ -62,9 +59,27 @@ namespace Test.Controllers
                     .Include(u => u.ChamberWood)
                         .ThenInclude(s => s.Value)
                     .Include(u => u.PlanDrying)
-                    .ToList(); 
+                    .ToList();
                     details.plan = plan.ValueChamber;
                     HttpContext.Response.Cookies.Append("id", id.ToString());
+                    for(int i = 1; i <= plan.ValueChamber; i++)
+                    {
+                        double values = 0;
+                        double hoursSpend = 0;
+                        var index = details.chambers.Where(p => p.ChamberNumber == i);
+                        foreach(var j in index)
+                        {
+                            hoursSpend += (double)Math.Ceiling(j.ChamberHoursSpend / Convert.ToDecimal(24));
+                            values += (double)j.ChamberCapacity;
+                        }
+                        chamberHoursSpend.Add(hoursSpend);
+                        chamberCapacity.Add(values);
+                    }
+                    details.chamberHoursSpend = chamberHoursSpend;
+                    details.chambCapacity = chamberCapacity;
+                    foreach (var cap in details.chambers){
+                        details.capacity += (double)cap.ChamberCapacity;
+                    }
                     return View(details);
                 }
             }
@@ -105,6 +120,7 @@ namespace Test.Controllers
             chamber.ChamberHoursSpend += (int)values.time;
             PlanDrying plan = await dBContext.PlanDryings.FirstOrDefaultAsync(p => p.Id == dataBase.PlanID);
             chamber.PlanDryingId = plan.Id;
+            chamber.ChamberCapacity = Convert.ToDecimal(values.chCapacity);
             dBContext.Chambers.Add(chamber);
             await dBContext.SaveChangesAsync();
 
@@ -174,10 +190,7 @@ namespace Test.Controllers
             }
             return NotFound();
         }
-        //public async Task<IActionResult> DetailsChambers(int? id, DetailsPlanViewModel details)
-        //{
-
-        //}
+        
         // POST: CalibrateValueController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -19,7 +19,15 @@
 				</select>
 			</p>
 			<label> Загрузить в камеру <input asp-for="CameraId" type="number" size="2" name="cameraId" min="1" max="@Model.CameraValueId" value="1"></label>
-
+			<p>
+				Количество пакетов = 
+				<select asp-for="Packages" name="packages">
+					<option>12</option>
+					<option>24</option>
+					<option>48</option>
+					<option>60</option>
+				</select>
+			</p>
 			<table style="width:960px; margin: auto">
 				<thead>
 					<tr>

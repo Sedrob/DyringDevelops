@@ -19,6 +19,7 @@
 					 {
 						<td><h5><b>@i</b></h5></td>
 					 } 
+					<td>E</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,11 +36,13 @@
 								<td colspan="@(Math.Ceiling(prop.ChamberHoursSpend / Convert.ToDecimal(24)))">
 									<a asp-action="OneDetailsChamber" asp-controller="CalibrateValue" asp-route-id="@prop.Id">
 									@prop.ChamberWood.TypeWood <br/> @prop.ChamberWood.Value.StartWidth x @prop.ChamberWood.Value.EndWidth x @(prop.PlanDrying.LengValue * 1000) </a>
-						</td>
-
+								</td>
+								
 							}
 
 						}
+						<td colspan="@(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) - Model.chamberHoursSpend[i-1])"> </td>
+						<td>@Model.chambCapacity[i-1]</td>
 					</tr>
 				}
 			</tbody>

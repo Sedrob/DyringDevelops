@@ -75,6 +75,8 @@ namespace Test
 
                 entity.Property(e => e.PlanDryingId).HasColumnName("planDrying_id");
 
+                entity.Property(e => e.ChamberCapacity).HasColumnName("chamberCapacity");
+
                 entity.HasOne(d => d.ChamberWood)
                     .WithMany(p => p.Chambers)
                     .HasForeignKey(d => d.ChamberWoodId)
