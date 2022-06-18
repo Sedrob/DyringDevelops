@@ -37,7 +37,7 @@ namespace Test.Formulas
 
         public double time { set; get; }
         public int camerValue { get; set; }
-        public Decimal cameraTimeValue { get; set; }
+        //public Decimal cameraTimeValue { get; set; }
         public int iteration { get; set; }
         public string wood { get; set; }
         public double s1 { get; set; }
@@ -88,8 +88,8 @@ namespace Test.Formulas
             }
 
             //
-            cameraTimeValue = ((int)time + 8) / 24;
-            cameraTimeValue = Math.Ceiling(Convert.ToDecimal((int)time + 8)) / 24;
+            //cameraTimeValue = ((int)time + 8) / 24;
+            //cameraTimeValue = Math.Ceiling(Convert.ToDecimal((int)time + 8)) / 24;
             //
 
             calc.chamberCapacity(this, dataBase);

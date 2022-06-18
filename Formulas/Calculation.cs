@@ -304,30 +304,34 @@ namespace Test.Formulas
         {
             DryingWood_DBContext dBContext = new DryingWood_DBContext();
             PlanDrying plan = await dBContext.PlanDryings.FirstOrDefaultAsync(p => p.Id == dataBase.PlanID);
-            double l = plan.LengValue;
-            double b = Convert.ToDouble(plan.WidthValue);
-            double h = Convert.ToDouble(plan.HeightValue);
-            int m = dataBase.Packages;
-            double v = 1;
-            switch (dataBase.S1)
+            if( plan != null)
             {
-                case 22:
-                    v = 0.333;
-                    break;
-                case 25:
-                    v = 0.356;
-                    break;
-                case 32:
-                    v = 0.399;
-                    break;
-                case 40:
-                    v = 0.438;
-                    break;
-                case 50:
-                    v = 0.474;
-                    break;
+                double l = plan.LengValue;
+                double b = Convert.ToDouble(plan.WidthValue);
+                double h = Convert.ToDouble(plan.HeightValue);
+                int m = dataBase.Packages;
+                double v = 1;
+                switch (dataBase.S1)
+                {
+                    case 22:
+                        v = 0.333;
+                        break;
+                    case 25:
+                        v = 0.356;
+                        break;
+                    case 32:
+                        v = 0.399;
+                        break;
+                    case 40:
+                        v = 0.438;
+                        break;
+                    case 50:
+                        v = 0.474;
+                        break;
+                }
+                values.chCapacity = Math.Round(l * b * h * m * v, 2);
             }
-            values.chCapacity =  Math.Round(l * b * h * m * v, 2);
+
         }
 
     }

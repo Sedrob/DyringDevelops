@@ -79,6 +79,9 @@ namespace Test.Controllers
                     details.chambCapacity = chamberCapacity;
                     foreach (var cap in details.chambers){
                         details.capacity += (double)cap.ChamberCapacity;
+                        details.dateYers = DateTime.ParseExact(cap.PlanDrying.MonthDrying, "MMMM", null).ToString("MMMM.yyy");
+                        details.date = DateTime.ParseExact(cap.PlanDrying.MonthDrying, "MMMM", null);
+                        //details.date = date.ToString("MMMM");
                     }
                     return View(details);
                 }
@@ -99,32 +102,46 @@ namespace Test.Controllers
         {
             int timeNow = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
             values.Values(calc, dataBase, values, tableC);
+            Chamber s = await dBContext.Chambers.FirstOrDefaultAsync(p => p.PlanDryingId == dataBase.PlanID);
+            int valueHours = s.ChamberHoursLeft;
+            int valueFact = 0;
+            foreach(var p in dBContext.Chambers.Where(p => p.ChamberNumber == dataBase.CameraId && p.PlanDryingId == dataBase.PlanID))
+            {
+                valueFact += p.ChamberHoursSpend;
+            }
+            if(valueHours >= valueFact + values.time)
+            {
+                valueWood.StartWetness = dataBase.StartDamp;
+                valueWood.EndWetness = dataBase.EndDamp;
+                valueWood.StartWidth = (int)dataBase.S1;
+                valueWood.EndWidth = (int)dataBase.S2;
+                valueWood.TypeWood = dataBase.TreeSpecies;
+                valueWood.HoursWood = (int)values.time;
+                dBContext.ValueWoods.Add(valueWood);
+                await dBContext.SaveChangesAsync();
+                chamberWood.ValueId = valueWood.Id;
+                chamberWood.TypeWood = dataBase.TreeSpecies;
+                chamberWood.TimeHours = (int)values.time;
+                chamberWood.Position = 1;//Отредактировать
+                dBContext.ChamberWoods.Add(chamberWood);
+                await dBContext.SaveChangesAsync();
+                chamber.ChamberNumber = dataBase.CameraId;
+                chamber.ChamberWoodId = chamberWood.Id;
+                chamber.ChamberHoursLeft = timeNow * 24;
+                chamber.ChamberHoursSpend += (int)values.time;
+                PlanDrying plan = await dBContext.PlanDryings.FirstOrDefaultAsync(p => p.Id == dataBase.PlanID);
+                chamber.PlanDryingId = plan.Id;
+                chamber.ChamberCapacity = Convert.ToDecimal(values.chCapacity);
+                dBContext.Chambers.Add(chamber);
+                await dBContext.SaveChangesAsync();
 
-            valueWood.StartWetness = dataBase.StartDamp;
-            valueWood.EndWetness = dataBase.EndDamp;
-            valueWood.StartWidth = (int)dataBase.S1;
-            valueWood.EndWidth = (int)dataBase.S2;
-            valueWood.TypeWood = dataBase.TreeSpecies;
-            valueWood.HoursWood = (int)values.time;
-            dBContext.ValueWoods.Add(valueWood);
-            await dBContext.SaveChangesAsync();
-            chamberWood.ValueId = valueWood.Id;
-            chamberWood.TypeWood = dataBase.TreeSpecies;
-            chamberWood.TimeHours = (int)values.time;
-            chamberWood.Position = 1;//Отредактировать
-            dBContext.ChamberWoods.Add(chamberWood);
-            await dBContext.SaveChangesAsync();
-            chamber.ChamberNumber = dataBase.CameraId;
-            chamber.ChamberWoodId = chamberWood.Id;
-            chamber.ChamberHoursLeft = timeNow * 24;
-            chamber.ChamberHoursSpend += (int)values.time;
-            PlanDrying plan = await dBContext.PlanDryings.FirstOrDefaultAsync(p => p.Id == dataBase.PlanID);
-            chamber.PlanDryingId = plan.Id;
-            chamber.ChamberCapacity = Convert.ToDecimal(values.chCapacity);
-            dBContext.Chambers.Add(chamber);
-            await dBContext.SaveChangesAsync();
-
-            return View(values);
+                return View(values);
+            }
+            else
+            {
+                return NotFound();
+            }
+            
         }
         
         public IActionResult DetailsChamber(int? id, DetailsChamberViewModel details, DataBaseViewModel dataBase, Calculation calc, ValuesCalculation values, ValuesTableCCalculation tableC)
@@ -190,62 +207,38 @@ namespace Test.Controllers
             }
             return NotFound();
         }
-        
+
         // POST: CalibrateValueController/Create
+
+        [HttpGet]
+        [ActionName("Delete")]
+        public async Task<IActionResult> ConfirmDelete(int? id)
+        {
+            if (id != null)
+            {
+                PlanDrying plan = await dBContext.PlanDryings.FirstOrDefaultAsync(p => p.Id == id);
+                if (plan != null)
+                    return View(plan);
+            }
+            return NotFound();
+        }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Delete(int? id)
         {
-            try
+            if (id != null)
             {
-                return RedirectToAction(nameof(Index));
+                PlanDrying user = await dBContext.PlanDryings.FirstOrDefaultAsync(p => p.Id == id);
+                if (user != null)
+                {
+                    dBContext.PlanDryings.Remove(user);
+                    await dBContext.SaveChangesAsync();
+                    return RedirectToAction("PrintValue");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return NotFound();
         }
 
-        // GET: CalibrateValueController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: CalibrateValueController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CalibrateValueController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CalibrateValueController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

@@ -8,14 +8,14 @@
 
 <div class="row">
 	<div class="col-12 text-center">
-		<h4>Календарный план на @DateTime.Now.AddMonths(1).ToString("MMMM.yyy")</h4>
+		<h4>Календарный план на @Model.dateYers</h4>
 	</div>
 	<div class="col-12 container-table">
 		<table class="plan-table">
 			<thead>
 				<tr>
 					<td> </td>
-					@for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
+					@for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, Model.date.Month); i++)
 					 {
 						<td><h5><b>@i</b></h5></td>
 					 } 
@@ -26,25 +26,35 @@
 				@for (int i = 1; i <= Model.plan; i++)
 				{
 					<tr>
-						<td><b>Камера @i</b>
-							<a asp-action="DetailsChamber" asp-controller="CalibrateValue" asp-route-id="@i">Подробнее</a>
+						<td>
+							<p><b>Камера @i</b></p>
+							@*<a asp-action="DetailsChamber" asp-controller="CalibrateValue" asp-route-id="@i">Подробнее</a>*@
 						</td>
 						@foreach (Chamber prop in Model.chambers)
 						{
 							@if (prop.ChamberNumber == i)
 							{
 								<td colspan="@(Math.Ceiling(prop.ChamberHoursSpend / Convert.ToDecimal(24)))">
+									
 									<a asp-action="OneDetailsChamber" asp-controller="CalibrateValue" asp-route-id="@prop.Id">
-									@prop.ChamberWood.TypeWood <br/> @prop.ChamberWood.Value.StartWidth x @prop.ChamberWood.Value.EndWidth x @(prop.PlanDrying.LengValue * 1000) </a>
+										@prop.ChamberWood.TypeWood <br /> @prop.ChamberWood.Value.StartWidth x @prop.ChamberWood.Value.EndWidth x @(prop.PlanDrying.LengValue * 1000) <br/> E = @prop.ChamberCapacity
+									</a>
 								</td>
-								
+
 							}
 
 						}
-						<td colspan="@(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) - Model.chamberHoursSpend[i-1])"> </td>
-						<td>@Model.chambCapacity[i-1]</td>
+						@if (DateTime.DaysInMonth(DateTime.Now.Year, Model.date.Month) > Model.chamberHoursSpend[i - 1])
+						{
+							<td colspan="@(DateTime.DaysInMonth(DateTime.Now.Year, Model.date.Month) - Model.chamberHoursSpend[i-1])"> </td>
+						}
+						<td>@Model.chambCapacity[i - 1]</td>
 					</tr>
 				}
+				<tr>
+					<td colspan="@(DateTime.DaysInMonth(DateTime.Now.Year, Model.date.Month))"> <td>
+					<td> @Model.capacity </td>
+				</tr>
 			</tbody>
 		</table>
 	</div>

@@ -11,7 +11,8 @@ namespace Test.ViewModels
         public List<double> chamberHoursSpend { get; set; }
         public int plan { get; set; }
         public double capacity { get; set; }
-
+        public string dateYers { get; set; }
+        public DateTime date { get; set; }
         public List<double> chambCapacity {get; set;}
 
 

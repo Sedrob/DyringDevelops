@@ -3,7 +3,7 @@
 	ViewData["Title"] = "AddChambers";
 }
 
-<h1 class="text-center">Расчет продолжительносьт сушки </h1>
+<h1 class="text-center">Расчет продолжительности сушки </h1>
 <hr />
 <div>
 	<form method="post" asp-action="Calculation">
@@ -20,7 +20,7 @@
 			</p>
 			<label> Загрузить в камеру <input asp-for="CameraId" type="number" size="2" name="cameraId" min="1" max="@Model.CameraValueId" value="1"></label>
 			<p>
-				Количество пакетов = 
+				Количество паллетов = 
 				<select asp-for="Packages" name="packages">
 					<option>12</option>
 					<option>24</option>
