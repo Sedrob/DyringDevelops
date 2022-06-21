@@ -81,7 +81,6 @@ namespace Test.Controllers
                         details.capacity += (double)cap.ChamberCapacity;
                         details.dateYers = DateTime.ParseExact(cap.PlanDrying.MonthDrying, "MMMM", null).ToString("MMMM.yyy");
                         details.date = DateTime.ParseExact(cap.PlanDrying.MonthDrying, "MMMM", null);
-                        //details.date = date.ToString("MMMM");
                     }
                     return View(details);
                 }
@@ -98,7 +97,8 @@ namespace Test.Controllers
             return View(dataBase);
         }
         // Заносение данных созданные в AddChambers
-        public async Task<IActionResult> Calculation(Calculation calc, DataBaseViewModel dataBase, ValuesCalculation values, ValuesTableCCalculation tableC, ValueWood valueWood, ChamberWood chamberWood, Chamber chamber)
+        public async Task<IActionResult> Calculation(Calculation calc, DataBaseViewModel dataBase, ValuesCalculation values, 
+            ValuesTableCCalculation tableC, ValueWood valueWood, ChamberWood chamberWood, Chamber chamber)
         {
             int timeNow = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
             values.Values(calc, dataBase, values, tableC);
